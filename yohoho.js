@@ -9,7 +9,7 @@ function showHacks(){
     controls.id = "adamsstuff";
     var lol = document.getElementById("adamsstuff");
     var loltext = document.createElement("div");
-    var loltextt = document.createTextNode("I - Change island \nO - Get coins \nP - Change skin");
+    var loltextt = document.createTextNode("-I Change island \n-O Get coins \n-P Change skin");
     loltext.appendChild(loltextt);
     var controlsText = document.createTextNode("Hacks");
     controls.appendChild(controlsText);
