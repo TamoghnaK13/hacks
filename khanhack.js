@@ -5,7 +5,7 @@
 <div id="box">
 <button class="ou" id="accordian">Toggle</button>
     <div class="ou" id="box2">
-        <p class="pdark" id="pdark"> KhanHack - Blazer </p>
+        <p class="pdark" id="pdark"> KhanHack - Penguin </p>
         <section><label>Answer: [<label id="ans1">...</label>]</label></section>
         <section><label>Next And Last Answer: [<label id="ans2"></label>]</label></section>
         <section><label>&nbsp;</label></section>
