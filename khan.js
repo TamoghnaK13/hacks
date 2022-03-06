@@ -30,7 +30,7 @@
     padding: 15px;
     margin-bottom: 5px;
     display: none;
-    border-radius: 25px;};
+    border-radius: 0 0 25px 25px;};
 section {
     display: flex;
     justify-content: space-between;margin:5px;}
@@ -49,7 +49,7 @@ section {
     width: 100%;
     border: 0;
     cursor: pointer;
-    border-radius: none none 13px 13px;}
+    border-radius: 13px;}
 label { font-weight: bold;}
 </style>
 `
