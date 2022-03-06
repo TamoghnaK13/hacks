@@ -7,7 +7,7 @@
     <div class="ou" id="box2">
         <p class="pdark" id="pdark"> KhanHack - 1.2 - Blazer</p>
         <section><label>Answer: [<label id="ans1">...</label>]</label></section>
-        <section><label>Next And Last Answer: [<label id="ans2"></label>]</label></section>
+        <section><label>Last Answer Of Quiz: [<label id="ans2"></label>]</label></section>
         <section><label>&nbsp;</label></section>
         <section><label id="ans3text">Dropdown 1: [<label id="ans3">...</label>]</label></section>
         <section><label id="ans4text">Dropdown 2: [<label id="ans4">...</label>]</label></section>
@@ -42,13 +42,14 @@ section {
     font-family: 'Quicksand', sans-serif;
     color:white;}
 .pdark { 
+   font-family: 'Quicksand', sans-serif;
    text-align: center;
    border-bottom:2px solid white;}
 #accordian {
     width: 100%;
     border: 0;
     cursor: pointer;
-    border-radius: 25px;}
+    border-radius: 13px;}
 label { font-weight: bold;}
 </style>
 `
