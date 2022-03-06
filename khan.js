@@ -69,7 +69,7 @@ acc.onclick = function() {
     if (panel.style.display == "grid") panel.style.display = "none";
     else { panel.style.display = "grid"; }
 }
- 
+ //The Hack Toggler Script
   document.addEventListener('keydown', (event) => {
     if (event.key === 'm') {
       
