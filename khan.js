@@ -5,7 +5,7 @@
 <div id="box">
 <button class="ou" id="accordian">Toggle</button>
     <div class="ou" id="box2">
-        <p class="pdark" id="pdark"> KhanHack - Penguin </p>
+        <p class="pdark" id="pdark"> KhanHack - 1.2 </p>
         <section><label>Answer: [<label id="ans1">...</label>]</label></section>
         <section><label>Next And Last Answer: [<label id="ans2"></label>]</label></section>
         <section><label>&nbsp;</label></section>
@@ -20,7 +20,7 @@
     
 </div>
 <style>
-
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300&display=swap');
 #box {
     z-index: 1090;
     position: fixed;
@@ -39,7 +39,7 @@ section {
     letter-spacing: 2px;
     font-weight: none;
     font-size: 11px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Fredoka', sans-serif;
     color:white;}
 .pdark { 
    text-align: center;
