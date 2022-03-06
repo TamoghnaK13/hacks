@@ -40,9 +40,7 @@ section {
     font-weight: none;
     font-size: 11px;
     font-family: 'Quicksand', sans-serif;
-    color:white;
-    border-top-left-radius: none;
-    border-top-right-radius: none;}
+    color:white;}
 .pdark { 
    font-family: 'Quicksand', sans-serif;
    text-align: center;
@@ -51,7 +49,7 @@ section {
     width: 100%;
     border: 0;
     cursor: pointer;
-    border-radius: 13px;}
+    border-radius: none none 13px 13px;}
 label { font-weight: bold;}
 </style>
 `
