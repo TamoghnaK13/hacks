@@ -40,7 +40,9 @@ section {
     font-weight: none;
     font-size: 11px;
     font-family: 'Quicksand', sans-serif;
-    color:white;}
+    color:white;
+    border-top-left-radius: none;
+    border-top-right-radius: none;}
 .pdark { 
    font-family: 'Quicksand', sans-serif;
    text-align: center;
