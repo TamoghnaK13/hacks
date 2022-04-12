@@ -1,13 +1,163 @@
-appendMenu();
-appendFunc();
+let terms = [];
+let definitions = [];
+let qs = '';
+let autoClick = false;
+let color = true;
+let menu = true;
 
-function appendMenu(){
-        var divBlock = `<div style="z-index: 99999;position: absolute;right: 5px;bottom: 5px;width: 230px;height: 28px;background-color: #d9dde8;border-radius: 6px;" id="menu"><p style=" font-size: 13px; color: rebeccapurple; padding: 8px 10px; text-align: center; " id="log">Hack By Ripple</p></div>`;
-        $("body").append(divBlock);
+document.addEventListener('keydown', function(event) {
+  if (event.code == 'Enter') {
+    Turn_on_hack();
+    showStatus();
+  }
+  if (event.code == 'KeyX') {
+    autoClick = !autoClick;
+    showStatus();
+  }
+  if (event.code == 'KeyZ') {
+    color = !color;
+    getCorrect();
+    showStatus();
+  }
+  if (event.code == 'KeyC') {
+  	menu = !menu;
+  	if (menu) {
+  		$('#menu').css('display','block');
+  	} else {
+  		$('#menu').css('display','none');
+  	}
+  }
+});
+
+$(document).ready(function() {
+});
+
+
+function Turn_on_hack(){
+	getQuizletCode(inputCode());
 }
-function appendFunc(){
-  var func = document.createElement("script");
-  func.innerHTML = `let terms=[],definitions=[],qs="",autoClick=!1,color=!0,menu=!0;function Turn_on_hack(){getQuizletCode(inputCode())}function showStatus(){let t="AUTO: "+autoClick+" |  COLOR: "+color;$("#log").text(t),console.log(t)}function Log(t){$("#log").text(t),console.log(t)}function inputCode(){let t=[];for(var e=0;e<6;e++)t[e]=$(".StudentGameCodeInput-inner input:eq("+e+")").val();let n=t.toString();return Log("GET INPUT ----\x3e "+(n=n.split(",").join(""))),n}function getQuizletCode(t){fetch('https://quizlet.com/webapi/3.2/game-instances?filters={"gameCode":'+t+',"isInProgress":true,"isDeleted":false}&perPage=500').then(t=>t.text()).then(t=>{t=(t=JSON.parse(t)).responses[0].models.gameInstance[0].itemId,window.quizletCode=t,Log("GET CODE ----\x3e "+t),appendJson()})}function getAnswer(){result=JSON.parse($("#answerJson").text()),window.questions=result;Log("LOAD JSON ----\x3e 100%"),parseQuestions()}function appendJson(){$("#answerJson").remove(),fetch("https://quizlet.com/"+window.quizletCode+"/").then(t=>t.text()).then(t=>{Log("LOAD ANSWER ----\x3e 100%");let e=t.split("<script");e=(e=(e=(e=(e=e[e.length-6]).split("/script>")[0]).split("QLoad(")[0]).split('(function(){window.Quizlet["setPageData"] = ')[1]).slice(0,-2),e=(e=JSON.parse(e)).termIdToTermsMap,e=JSON.stringify(e);$("body").append("<div style='display:none' id='answerJson'></div>"),$("#answerJson").append(e),getAnswer()})}function parseQuestions(){let t=window.questions,e=Object.keys(t);terms=[],definitions=[];for(let n=0;n<e.length;n++)terms.push(t[e[n]].word),definitions.push(t[e[n]].definition);setInterval(waitForChange,100),showStatus()}function waitForChange(){let t=$(".FormattedText.notranslate.StudentPrompt-text div").text();qs!=t&&(getCorrect(),qs=t)}function changeColor(t,e){color?$(".StudentAnswerOptions .StudentAnswerOptions-optionCard .FormattedText:eq("+t+")").css("color",e):$(".StudentAnswerOptions .StudentAnswerOptions-optionCard .FormattedText:eq("+t+")").css("color","black")}function getCorrect(){let t=$(".FormattedText.notranslate.StudentPrompt-text div").text(),e=$(".StudentAnswerOptions .StudentAnswerOptions-optionCard .FormattedText"),n=[];for(let t=0;t<e.length;t++)n.push(e[t].textContent);flipped=!1,-1===terms.indexOf(t)&&(termsQ=terms,terms=definitions,definitions=termsQ);let o=n.indexOf(definitions[terms.indexOf(t)]);for(let t=0;t<e.length;t++)changeColor(t,"red");try{-1!=o&&(changeColor(o,"lime"),autoClick&&$(".StudentAnswerOptions .StudentAnswerOptions-optionCard .FormattedText:eq("+o+")").click())}catch(t){getCorrect()}}document.addEventListener("keydown",function(t){"Enter"==t.code&&(Turn_on_hack(),showStatus()),"KeyX"==t.code&&(autoClick=!autoClick,showStatus()),"KeyZ"==t.code&&(color=!color,getCorrect(),showStatus()),"KeyC"==t.code&&((menu=!menu)?$("#menu").css("display","block"):$("#menu").css("display","none"))}),$(document).ready(function(){});`;
-  $("body").append(func);
-  console.log('Ripple Hack Working!')
+
+function showStatus(){
+	let log = 'AUTO: ' + autoClick + ' |  COLOR: ' + color;
+	$('#log').text(log);
+	console.log(log);
+}
+
+function Log(content){
+	$('#log').text(content);
+	console.log(content);
+}
+
+function inputCode(){
+	let code = [];
+	for (var i = 0; i < 6; i++) {
+		code[i] = $('.StudentGameCodeInput-inner input:eq('+i+')').val();
+	}
+	let strCode = code.toString();
+	strCode = strCode.split(',').join('');
+	let log = 'GET INPUT ----> ' + strCode;
+	Log(log);
+	return strCode;
+}
+
+function getQuizletCode(code){
+	fetch(`https://quizlet.com/webapi/3.2/game-instances?filters={"gameCode":`+code+`,"isInProgress":true,"isDeleted":false}&perPage=500`)
+        .then(e => e.text())
+        	.then(stuff => {
+        		stuff = JSON.parse(stuff);
+        		stuff = stuff.responses[0].models.gameInstance[0].itemId;
+        		window.quizletCode = stuff;
+        		let log = 'GET CODE ----> ' + stuff;
+				Log(log);
+				appendJson();
+   		});
+}
+
+function getAnswer(){
+	result = JSON.parse($("#answerJson").text());
+	window.questions = result;
+	let log = 'LOAD JSON ----> 100%';
+	Log(log);
+	parseQuestions();
+}
+
+function appendJson() {
+	$("#answerJson").remove();
+    fetch(`https://quizlet.com/`+window.quizletCode+`/`)
+        .then(e => e.text())
+        .then(stuff => {
+        let log = 'LOAD ANSWER ----> 100%';
+		Log(log);
+        let split = stuff.split("<script");
+        split = split[split.length - 6];
+        split = split.split("/script>")[0];
+        split = split.split("QLoad(")[0];
+        split = split.split(`(function(){window.Quizlet["setPageData"] = `)[1];
+        split = split.slice(0, -2);
+        split = JSON.parse(split);
+        split = split.termIdToTermsMap;
+        split = JSON.stringify(split);
+        var divBlock = "<div style='display:none' id='answerJson'></div>";
+        $("body").append(divBlock);
+        $("#answerJson").append(split);
+        getAnswer();
+    })
+}
+
+function parseQuestions() {
+  let q = window.questions;
+  let qKeys = Object.keys(q);
+  terms = [];
+  definitions = [];
+  for(let x=0;x<qKeys.length;x++) {
+    terms.push(q[qKeys[x]].word);
+    definitions.push(q[qKeys[x]].definition);
+  }
+  setInterval(waitForChange, 100);
+  showStatus();
+}
+
+function waitForChange(){
+	let cQ = $(".FormattedText.notranslate.StudentPrompt-text div").text();
+	if (qs != cQ) {
+		getCorrect();
+		qs = cQ;
+	}
+}
+
+function changeColor(n,c){
+	if (color) {
+  		$(".StudentAnswerOptions .StudentAnswerOptions-optionCard .FormattedText:eq("+n+")").css('color',c);
+  	} else {
+  		$(".StudentAnswerOptions .StudentAnswerOptions-optionCard .FormattedText:eq("+n+")").css('color','black');
+  	}
+}
+
+function getCorrect() {
+  let currentQ = $(".FormattedText.notranslate.StudentPrompt-text div").text();
+  let answers = $(".StudentAnswerOptions .StudentAnswerOptions-optionCard .FormattedText");
+  let txt = [];
+  for(let x=0;x<answers.length;x++) {
+    txt.push(answers[x].textContent);
+  }
+  flipped = false;
+  if(terms.indexOf(currentQ) === -1) {
+    termsQ = terms
+    terms = definitions
+    definitions = termsQ
+  }
+  let int = txt.indexOf(definitions[terms.indexOf(currentQ)]);
+  for(let x=0;x<answers.length;x++) {
+	changeColor(x,'red');
+  }
+  try {
+    if (int != -1) {
+      changeColor(int,'lime');
+      if (autoClick) {
+        $(".StudentAnswerOptions .StudentAnswerOptions-optionCard .FormattedText:eq("+int+")").click();
+      }
+    }
+  }catch(err){
+    getCorrect();
+  }
 }
